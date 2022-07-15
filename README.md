@@ -1,5 +1,5 @@
 # 91downloader
 
-> Output directory: ./merged
-> log file: ./log
-> urls source file: ./urls
+- Output directory: ./merged
+- log file: ./log
+- urls source file: ./urls
