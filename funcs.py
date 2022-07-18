@@ -37,13 +37,16 @@ def GetBaseUrl(url):
 
 
 def GetMaxPageNum(url):
+    max_page_num = 0
     base_url = "https://91porn.com/v.php"
     logging.info("GetMaxPageNum of url: %s", url)
     scraper = cfscrape.create_scraper()
-    url = scraper.get(url).content.decode('UTF-8')
+    try:
+        url = scraper.get(url).content.decode('UTF-8')
+    except:
+        return max_page_num
     soup = BeautifulSoup(url, 'html.parser')
     div_pagingnav = soup.find_all("div", attrs={"class": "pagingnav"})
-    max_page_num = 0
     if len(div_pagingnav) > 0:
         div = div_pagingnav[0]
         not_last_page = div.find_all("a", string="»")
@@ -125,8 +128,8 @@ def MultipleDownload(url):
     max_page_num = GetMaxPageNum(url)
     logging.info("Got max_page_num: %d", max_page_num)
     base_url = GetBaseUrl(url)
-    if max_page_num > 3:
-        max_page_num = 3
+    if max_page_num > 10:
+        max_page_num = 10
     for page_num in range(1, max_page_num):
         logging.info("Current page num: %d,  max_page_num: %d",
                      page_num, max_page_num)
