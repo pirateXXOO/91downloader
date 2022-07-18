@@ -96,7 +96,7 @@ def Download(vid):
         return
     else:
         part_num = 1
-        while part_num > 0:
+        while True:
             part_url = base_url + vid + "/" + vid + str(part_num) + ".ts"
             logging.info("Downloading %s", part_url)
             try:
